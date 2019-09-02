@@ -81,9 +81,6 @@ class LasTrainer(BaseTrainer):
             if batch_idx == self.len_epoch:
                 break
 
-            if batch_idx == 1:
-                break
-
         log = {
             'loss': total_loss / self.len_epoch,
             'metrics': (total_metrics / self.len_epoch).tolist()
