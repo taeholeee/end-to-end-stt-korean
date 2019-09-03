@@ -1,6 +1,6 @@
 from torchvision import datasets, transforms
 from base import BaseDataLoader
-from data_loader.transforms import ZeroPadding, Hangul, Encoding, OneHotEncoding, Squeeze
+from data_loader.transforms import ZeroPadding, Hangul, Encoding, OneHotEncoding, Squeeze, ToTensor
 from data_loader.datasets import KaldiDataset
 
 class MnistDataLoader(BaseDataLoader):
@@ -23,14 +23,14 @@ class KaldiDataLoader(BaseDataLoader):
     """
     def __init__(self, feats_file, labels_file=None, root_dir=None, batch_size=64, shuffle=True, validation_split=0.0, num_workers=1):
         trsfm = transforms.Compose([
-            transforms.ToTensor(), 
+            ToTensor(), 
             ZeroPadding()
         ])
         target_trsfm = transforms.Compose([
             Hangul(), 
             Encoding(), 
             OneHotEncoding(), 
-            transforms.ToTensor()
+            ToTensor()
         ])
         self.feats_file = feats_file
         self.labels_file = labels_file

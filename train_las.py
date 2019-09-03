@@ -31,10 +31,14 @@ def main(config):
 
     lr_scheduler = config.initialize('lr_scheduler', torch.optim.lr_scheduler, optimizer)
 
-    # dataset = data_loader.dataset
+    # from data_loader.datasets import KaldiDataset
+    # from data_loader.transforms import ZeroPadding, Hangul, Encoding, OneHotEncoding, Squeeze, ToTensor
+    # # dataset = data_loader.dataset
+    # dataset = KaldiDataset("feats.scp", "text", "/data/asrdata/mobile2/train_mobile2", transform=ToTensor())
     # feats, labels = dataset[1]
+    # print(feats.shape, labels)
     # for batch_idx, (feats, labels) in enumerate(data_loader):
-    #     print(batch_idx, feats.squeeze().shape, labels.squeeze().shape)
+    #     print(batch_idx, feats.shape, labels.shape)
     trainer = LasTrainer(model, loss, metrics, optimizer,
                       config=config,
                       data_loader=data_loader,

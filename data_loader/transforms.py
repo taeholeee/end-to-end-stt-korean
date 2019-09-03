@@ -13,10 +13,15 @@ class ZeroPadding(object):
         self.pad_len = pad_len
     
     def __call__(self, tensor):
-        n_sample, n_time, n_feat = tensor.shape
-        # result = F.pad(input=tensor, pad=(0, 0, 0, self.pad_len - n_time), value=0)
-        padded = torch.zeros(n_sample, self.pad_len, n_feat)
-        padded[:, :n_time, :] = tensor
+        if tensor.ndim == 3:
+            n_sample, n_time, n_feat = tensor.shape
+            # result = F.pad(input=tensor, pad=(0, 0, 0, self.pad_len - n_time), value=0)
+            padded = torch.zeros(n_sample, self.pad_len, n_feat)
+            padded[:, :n_time, :] = tensor
+        else:
+            n_time, n_feat = tensor.shape
+            padded = torch.zeros(self.pad_len, n_feat)
+            padded[:n_time, :] = tensor
         return padded
     # Input x: list of np array with shape (timestep,feature)
 # Return new_x : a np array of shape (len(x), padded_timestep, feature)
@@ -91,3 +96,9 @@ class Squeeze(object):
     def __call__(self, tensor):
         tensor.squeeze()
         return tensor
+
+class ToTensor(object):
+    """Convert ndarrays in sample to Tensors."""
+
+    def __call__(self, sample):
+        return torch.from_numpy(sample)
