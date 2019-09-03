@@ -13,7 +13,7 @@ class ZeroPadding(object):
         self.pad_len = pad_len
     
     def __call__(self, tensor):
-        if tensor.ndim == 3:
+        if tensor.dim() == 3:
             n_sample, n_time, n_feat = tensor.shape
             # result = F.pad(input=tensor, pad=(0, 0, 0, self.pad_len - n_time), value=0)
             padded = torch.zeros(n_sample, self.pad_len, n_feat)
