@@ -27,7 +27,7 @@
             "feats_file": "feats.scp", 
             "labels_file": "text", 
             "root_dir": "/data/asrdata/mobile2/train_mobile2", 
-            "batch_size": 12,
+            "batch_size": 64,
             "max_timestep": 1024,
             "max_label_len": 128,
             "output_class_dim": 55,
@@ -66,6 +66,6 @@
         "monitor": "min val_loss",
         "early_stop": 10,
 
-        "tensorboard": true
+        "tensorboard": false
     }
 }
