@@ -5,7 +5,7 @@
     "arch": {
         "type": "LASModel",
         "args": {
-            "max_label_len": 320,
+            "max_label_len": 128,
             "input_feature_dim": 40,
             "listener_hidden_dim": 256,
             "listener_layer": 2,
@@ -28,6 +28,9 @@
             "labels_file": "text", 
             "root_dir": "/data/asrdata/mobile2/train_mobile2", 
             "batch_size": 12,
+            "max_timestep": 1024,
+            "max_label_len": 128,
+            "output_class_dim": 55,
             "shuffle": true,
             "validation_split": 0.1,
             "num_workers": 4
