@@ -64,7 +64,7 @@ class KaldiDataset(Dataset):
             if self.labels is not None:
                 label = self.labels[utt_name]
                 syllables = convert_hangul(label)
-                if len(syllables) > self.max_label_len:
+                if len(syllables)+2 > self.max_label_len:
                     label = None
                     if idx not in self._unsafe_indices:
                         self._unsafe_indices.append(idx)

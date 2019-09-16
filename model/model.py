@@ -73,7 +73,8 @@ class pBLSTMLayer(nn.Module):
         # Reduce time resolution
         input_x = input_x.contiguous().view(batch_size,int(timestep/2),feature_dim*2)
         # Bidirectional RNN
-        self.BLSTM.flatten_parameters()
+        if self.training:
+            self.BLSTM.flatten_parameters()
         output,hidden = self.BLSTM(input_x)
         return output,hidden
 
@@ -126,7 +127,8 @@ class Speller(nn.Module):
 
     # Stepwise operation of each sequence
     def forward_step(self,input_word, last_hidden_state,listener_feature):
-        self.rnn_layer.flatten_parameters()
+        if self.training:
+            self.rnn_layer.flatten_parameters()
         rnn_output, hidden_state = self.rnn_layer(input_word,last_hidden_state)
         attention_score, context = self.attention(rnn_output,listener_feature)
         concat_feature = torch.cat([rnn_output.squeeze(dim=1),context],dim=-1)

@@ -38,5 +38,8 @@ def letter_error_rate(pred_y,true_y):
         # if data == 'timit':
         #     compressed_t = collapse_phn(compressed_t)
         #     compressed_p = collapse_phn(compressed_p)
-        ed_accumalate.append(ed.eval(compressed_p,compressed_t)/len(compressed_t))
+        try:
+            ed_accumalate.append(ed.eval(compressed_p,compressed_t)/len(compressed_t))
+        except ZeroDivisionError:
+            ed_accumalate.append(1.0)
     return sum(ed_accumalate)/len(ed_accumalate)

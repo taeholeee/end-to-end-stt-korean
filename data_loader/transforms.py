@@ -89,10 +89,8 @@ class OneHotEncoding(object):
     def __call__(self, Y):
         if Y is None:
             return None
-        new_y = np.zeros((self.max_label_len+2, self.max_idx))
+        new_y = np.zeros((self.max_label_len, self.max_idx))
         new_y[0,0] = 1.0 # <sos>
-        # if len(Y) > self.max_idx:
-        #     return None
         for idx, label in enumerate(Y):
             new_y[idx+1,label] = 1.0
         new_y[len(Y)+1,1] = 1.0 # <eos>
