@@ -57,7 +57,8 @@ def main(config, test_root):
 
     with torch.no_grad():
         for i, (data, target) in enumerate(tqdm(data_loader)):
-            data, target = data.to(device), target.to(device)
+            # data, target = data.to(device), target.to(device)
+            data, target = data.squeeze().to(device, dtype=torch.float32), target.squeeze().to(device, dtype=torch.float32)
             output = model(data)
 
             #

@@ -16,7 +16,7 @@ def label_smoothing_loss(pred_y,true_y,label_smoothing=0.1):
         pred_y = pred_y.permute(0,2,1)#pred_y.contiguous().view(-1,output_class_dim)
         # true_y = torch.max(true_y,dim=2)[1][:,:max_label_len].contiguous()#.view(-1)
         true_y = torch.max(true_y,dim=2)[1].contiguous()#.view(-1)
-        loss = criterion(output, target)
+        loss = criterion(pred_y, true_y)
     else:
         # true_y = true_y[:,:max_label_len,:].contiguous()
         true_y = true_y.contiguous()

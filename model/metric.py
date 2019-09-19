@@ -43,3 +43,4 @@ def letter_error_rate(pred_y,true_y):
         except ZeroDivisionError:
             ed_accumalate.append(1.0)
     return sum(ed_accumalate)/len(ed_accumalate)
+
